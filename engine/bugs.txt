@@ -1,0 +1,10 @@
+Bugs:
+   1. Can double jump/ mess up jumping
+   2. jumping is too slow/seems off
+   3. Hit detection is off
+   4. ground and sky generation are not great and need to replace the randomization
+   5. Seg faults on hit detection of any object outside the first one in the vector
+
+Need to add:
+   1. Add network getting
+   2. Missle generation and detection

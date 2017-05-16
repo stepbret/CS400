@@ -1,0 +1,31 @@
+C_OBJS = udpsocket.o serverpacket.o clientlink.o clientmain.o clientpacket.o
+S_OBJS = udpsocket.o serverpacket.o serverlink.o servermain.o clientpacket.o
+CC = g++
+CFLAGS = -pthread
+
+client : $(C_OBJS)
+	$(CC) $(LFLAGS) $(C_OBJS) -o client
+
+server : $(S_OBJS)
+	$(CC) $(LFLAGS) $(S_OBJS) -o server
+
+udpsocket.o : udpsocket.h udpsocket.cpp
+	$(CC) $(CFLAGS) -c udpsocket.cpp
+
+clientlink.o : clientlink.h clientlink.cpp udpsocket.h serverpacket.h clientpacket.h
+	$(CC) $(CFLAGS) -c clientlink.cpp
+
+clientmain.o : clientmain.cpp
+	$(CC) $(CFLAGS) -c clientmain.cpp
+
+clientpacket.o : clientpacket.h clientpacket.cpp
+	$(CC) $(CFLAGS) -c clientpacket.cpp
+
+serverpacket.o : serverpacket.h serverpacket.cpp
+	$(CC) $(CFLAGS) -c serverpacket.cpp
+
+serverlink.o : serverlink.h serverlink.cpp udpsocket.h serverpacket.h clientpacket.h
+	$(CC) $(CFLAGS) -c serverlink.cpp
+
+clean:
+	\rm *.o *~ client
